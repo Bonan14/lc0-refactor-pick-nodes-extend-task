@@ -107,9 +107,9 @@ class MEvaluator {
    const float child_m = std::round(child->GetM() / 2.0f);
    // Weighted average(w) of movesleft to give greater priority to
    // shorter moves when winning and longer moves when losing.
-   double w = 1.0f / (1.0f + std::exp((steepness_factor_)
+   float w = 1.0f / (1.0f + std::exp((steepness_factor_)
                     * ((move_midpoint_ - child_m) / 200.0f)));
-   double m = ((move_midpoint_ - child_m) / 200.0f);
+   float m = ((move_midpoint_ - child_m) / 200.0f);
    // Add 1 to the value before taking the logarithm,
    // to avoid getting undefined values.
    // use abs and copysign to protect against -inf
@@ -119,7 +119,7 @@ class MEvaluator {
    return m;
   }
 
-  double GetMUtility(const EdgeAndNode& child, float q) const {
+  float GetMUtility(const EdgeAndNode& child, float q) const {
     if (!enabled_ || !parent_within_threshold_) return 0.0f;
     if (child.GetN() == 0) return 0.0f;
     return GetMUtility(child.node(), q);
