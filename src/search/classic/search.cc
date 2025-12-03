@@ -104,7 +104,7 @@ class MEvaluator {
   // Calculates the utility for favoring shorter wins and longer losses.
   float GetMUtility(Node* child, float q) const {
    if (!enabled_ || !parent_within_threshold_) return 0.0f;
-   const float child_m = std::round(child->GetM() / 2.0f);
+   const float child_m = child->GetM() / 2.0f;
    // Weighted average(w) of movesleft to give greater priority to
    // shorter moves when winning and longer moves when losing.
    float w = 1.0f / (1.0f + std::exp((steepness_factor_)

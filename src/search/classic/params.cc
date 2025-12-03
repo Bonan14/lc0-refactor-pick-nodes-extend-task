@@ -370,15 +370,15 @@ const OptionId BaseSearchParams::kScoreTypeId{
     "score-type", "ScoreType",
     "What to display as score. Either centipawns (the UCI default), win "
     "percentage or Q (the actual internal score) multiplied by 100."};
-const OptionId SearchParams::kMovesLeftMidpointMoveId{
+const OptionId BaseSearchParams::kMovesLeftMidpointMoveId{
     "moves-left-midpoint-move", "MovesLeftMidpointMove",
     "determines where the curve-value crosses the y-axis,"
 	"where the value of the calculation for m gets negative."};
-const OptionId SearchParams::kMovesLeftThresholdId{
+const OptionId BaseSearchParams::kMovesLeftThresholdId{
     "moves-left-threshold", "MovesLeftThreshold",
     "Absolute value of node Q needs to exceed this value before shorter wins "
     "or longer losses are considered."};
-const OptionId SearchParams::kMovesLeftSteepnessFactorId{
+const OptionId BaseSearchParams::kMovesLeftSteepnessFactorId{
     "moves-left-steepness-factor", "MovesLeftSteepnessFactor",
     "This sets the steepness of the curve,"
 	"which is how quickly the Mutility value changes as the moves-left decrease."
