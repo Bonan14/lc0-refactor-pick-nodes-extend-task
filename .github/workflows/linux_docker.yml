@@ -15,8 +15,6 @@ jobs:
       matrix:
         include:
           # Ubuntu (LTS & Latest)
-          - image: "ubuntu:20.04"
-            name: "ubuntu-20.04"
           - image: "ubuntu:22.04"
             name: "ubuntu-22.04"
           - image: "ubuntu:24.04"
