@@ -1,0 +1,55 @@
+name: Linux Docker Build
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Ubuntu (LTS & Latest)
+          - image: "ubuntu:20.04"
+            name: "ubuntu-20.04"
+          - image: "ubuntu:22.04"
+            name: "ubuntu-22.04"
+          - image: "ubuntu:24.04"
+            name: "ubuntu-24.04"
+          # Debian (Stable & OldStable)
+          - image: "debian:bullseye"
+            name: "debian-bullseye"
+          - image: "debian:bookworm"
+            name: "debian-bookworm"
+          # Fedora (Latest, represents RedHat family)
+          - image: "fedora:latest"
+            name: "fedora-latest"
+          # Arch Linux (Rolling)
+          - image: "archlinux:base-devel"
+            name: "archlinux"
+          # OpenSUSE (Leap)
+          - image: "opensuse/leap:latest"
+            name: "opensuse-leap"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      
+      - name: Build in Docker (${{ matrix.image }})
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace \
+            ${{ matrix.image }} \
+            /bin/bash scripts/ci_build.sh
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lc0-linux-${{ matrix.name }}
+          path: build/lc0
